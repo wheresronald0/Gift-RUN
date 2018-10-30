@@ -1,15 +1,31 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./NavBar.css";
+import LogoPic from "./Logo/LogoPic";
 
 const navBar = props => {
   return (
     <header>
       <nav className="navBar">
-        <h1>Gift-RUN</h1>
+        <div className="logoImg">
+          <LogoPic />
+        </div>
         <ul>
-          <p>Your Gift-RUNS</p>
-          <p>Charities</p>
-          <p>Home</p>
+          <li>
+            <NavLink to={"/all-runs"}>Your Gift-RUNS</NavLink>
+          </li>
+
+          <li>
+            <NavLink to={"/log-run"}>Log a Run</NavLink>
+          </li>
+
+          <li>
+            <NavLink to={"/charities"}>Charities</NavLink>
+          </li>
+
+          <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
         </ul>
       </nav>
     </header>

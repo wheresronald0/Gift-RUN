@@ -1,7 +1,15 @@
 .charities {
-  width: auto;
-  height: 35%;
+  margin-top: 5%;
+  width: 60%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  border: solid 0 rgba(0, 0, 0, 0.788);
+  background-color: rgba(116, 116, 116, 0.267);
+  box-shadow: 0 3px 4px rgb(85, 85, 85);
+  justify-content: center;
+}
+
+h1 {
+  font-size: 1.3em;
+  font-weight: 450;
+  color: rgba(29, 29, 29, 0.87);
 }
