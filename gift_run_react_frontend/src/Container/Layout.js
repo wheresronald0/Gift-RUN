@@ -4,11 +4,9 @@ import NavBar from "../Components/NavBar/NavBar";
 import "../Container/Layout.css";
 import backdrop from "../Assets/backdrop.jpeg";
 import LogRun from "./LogRun/LogRun";
-// import RunSummary from "../Components/RunSummary/RunSummary";
 import Charities from "../Components/Charities/Charities";
 import AllRuns from "../Components/AllRuns/AllRuns";
 import LandingPage from "../Components/LandingPage/LandingPage";
-
 class Layout extends Component {
   render() {
     console.log("Hello from layout");
