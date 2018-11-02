@@ -17,6 +17,9 @@ class LogRun extends Component {
     };
   }
 
+edit-update request:
+// get request with id to get data a set state (already have in tag)
+
   postRunHandler = () => {
     const data = {
       date: this.state.date,
