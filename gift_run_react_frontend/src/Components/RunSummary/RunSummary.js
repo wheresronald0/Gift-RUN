@@ -15,13 +15,16 @@ class RunSummary extends Component {
 
   componentDidUpdate() {
     this.loadData();
+    // console.log("Comp did updtate");
+    // console.log(this.props);
+    // console.log(this.state.run);
   }
 
   loadData() {
     if (this.props.match.params.id) {
       if (
         !this.state.run ||
-        (this.state.run.id && this.state.run.id !== +this.props.match.params.id)
+        (this.state.run && this.state.run._id !== this.props.match.params.id)
         // (this.state.run && this.state.run.id !== this.props.id)
       ) {
         axios
@@ -38,27 +41,20 @@ class RunSummary extends Component {
 
   setDeleteRedirect = () => {
     this.setState({ deleteRedirect: true });
+    this.setDeleteRedirect = this.setDeleteRedirect.bind(this);
+    console.log(this.state);
   };
 
   renderOnDeleteRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/workAround" exact />;
-    }
-  };
-
-  setUpdateRedirect = () => {
-    this.setState({ updateRedirect: true });
-  };
-
-  renderOnUpdateRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/workAround" exact />;
+    if (this.state.deleteRedirect) {
+      console.log("Redirect should be working");
+      return <Redirect to="/workAround" />;
     }
   };
 
   deletePostHandler = () => {
     axios
-      .delete("http://localhost:4000/run/" + this.props.match.params.id)
+      .delete("http://localhost:4000/run/" + this.state.run._id)
       .then(response => {
         console.log(response);
         if (response) {
@@ -74,7 +70,7 @@ class RunSummary extends Component {
   render() {
     console.log("HI from Run Summary");
     console.log(this.props);
-    console.log(this.state.run);
+    console.log(this.state);
     let run = null;
     if (this.state.run) {
       run = (
