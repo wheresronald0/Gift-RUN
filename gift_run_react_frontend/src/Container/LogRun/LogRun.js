@@ -69,10 +69,12 @@ class LogRun extends Component {
           />
           <label>Which Charity?</label>
           <select
+            value={"Please Select:"}
             onChange={event =>
               this.setState({ run: { charity: event.target.value } })
             }
           >
+            <option> Please Select:</option>
             <option value="SPCA">SPCA</option>
             <option value="Cat House on the Kings">
               Cat House on the Kings
@@ -80,7 +82,6 @@ class LogRun extends Component {
             <option value="Wounded Warriors">Wounded Warriors</option>
             <option value="Red Cross">Red Cross</option>
           </select>
-
           <button onClick={this.postRunHandler}>Log Run</button>
           {this.renderRedirect()}
         </div>

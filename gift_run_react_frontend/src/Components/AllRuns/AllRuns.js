@@ -3,8 +3,7 @@ import EachRun from "./EachRun/EachRun";
 import "./AllRuns.css";
 import RunSummary from "../RunSummary/RunSummary";
 import axios from "axios";
-import { Link, Route, Switch } from "react-router-dom";
-import UpdateRun from "../../Container/LogRun/UpdateRun/UpdateRun";
+import { Link, Route } from "react-router-dom";
 
 //need to .map jsx on Layout component
 class AllRuns extends Component {

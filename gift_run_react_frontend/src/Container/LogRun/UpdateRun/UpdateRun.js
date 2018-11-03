@@ -3,6 +3,10 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import "./UpdateRun.css";
 // import Charities from "../../../Components/Charities/Charities";
+import SPCA from "../../../Components/Charities/Charity/SPCA";
+import CatHouse from "../../../Components/Charities/Charity/CatHouse";
+import WoundedWarriors from "../../../Components/Charities/Charity//WoundedWarriors";
+import RedCross from "../../../Components/Charities/Charity/RedCross";
 
 class UpdateRun extends Component {
   constructor(props) {
@@ -76,8 +80,9 @@ class UpdateRun extends Component {
     let updateForm = null;
     if (this.state.run) {
       updateForm = (
-        <div className="logRun">
-          {/* <label>Fake News</label>
+        <div>
+          <div className="logRun">
+            {/* <label>Fake News</label>
           <input
             type="text"
             value={this.state.run.title}
@@ -85,54 +90,62 @@ class UpdateRun extends Component {
               this.setState({ run: { title: event.target.value } });
             }}
           /> */}
-          <label>Date of Your Run</label>
-          <input
-            type="text"
-            value={this.state.run.date}
-            onChange={event =>
-              this.setState({ run: { date: event.target.value } })
-            }
-          />
-          <label>Total Miles You Ran</label>
-          <input
-            type="text"
-            value={this.state.run.miles}
-            onChange={event =>
-              this.setState({ run: { miles: event.target.value } })
-            }
-          />
-          <label>Total Run Time</label>
-          <input
-            type="text"
-            value={this.state.run.totalTime}
-            onChange={event =>
-              this.setState({ run: { totalTime: event.target.value } })
-            }
-          />
-          <label>Location of Your Run</label>
-          <input
-            type="text"
-            value={this.state.run.location}
-            onChange={event =>
-              this.setState({ run: { location: event.target.value } })
-            }
-          />
-          <label>Which Charity?</label>
-          <select
-            onChange={event =>
-              this.setState({ run: { charity: event.target.value } })
-            }
-            value={this.state.run.charity}
-          >
-            <option value="SPCA">SPCA</option>
-            <option value="Cat House on the Kings">
-              Cat House on the Kings
-            </option>
-            <option value="Wounded Warriors">Wounded Warriors</option>
-            <option value="Red Cross">Red Cross</option>
-          </select>
-          <button onClick={this.updateRunHandler}>Update Run</button>
-          {this.renderOnUpdateRedirect()}
+            <label>Date of Your Run</label>
+            <input
+              type="text"
+              value={this.state.run.date}
+              onChange={event =>
+                this.setState({ run: { date: event.target.value } })
+              }
+            />
+            <label>Total Miles You Ran</label>
+            <input
+              type="text"
+              value={this.state.run.miles}
+              onChange={event =>
+                this.setState({ run: { miles: event.target.value } })
+              }
+            />
+            <label>Total Run Time</label>
+            <input
+              type="text"
+              value={this.state.run.totalTime}
+              onChange={event =>
+                this.setState({ run: { totalTime: event.target.value } })
+              }
+            />
+            <label>Location of Your Run</label>
+            <input
+              type="text"
+              value={this.state.run.location}
+              onChange={event =>
+                this.setState({ run: { location: event.target.value } })
+              }
+            />
+            <label>Which Charity?</label>
+            <select
+              onChange={event =>
+                this.setState({ run: { charity: event.target.value } })
+              }
+              value={this.state.run.charity}
+            >
+              <option> Please Select:</option>
+              <option value="SPCA">SPCA</option>
+              <option value="Cat House on the Kings">
+                Cat House on the Kings
+              </option>
+              <option value="Wounded Warriors">Wounded Warriors</option>
+              <option value="Red Cross">Red Cross</option>
+            </select>
+            <button onClick={this.updateRunHandler}>Update Run</button>
+            {this.renderOnUpdateRedirect()}
+          </div>
+          <div>
+            <SPCA />
+            <CatHouse />
+            <WoundedWarriors />
+            <RedCross />
+          </div>
         </div>
       );
     }

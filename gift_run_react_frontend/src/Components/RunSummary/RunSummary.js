@@ -81,6 +81,7 @@ class RunSummary extends Component {
             <p>{this.state.run.miles}</p>
             <p>{this.state.run.totalTime}</p>
             <p>{this.state.run.location}</p>
+            <p>{this.state.run.charity}</p>
           </div>
           <div>
             <NavLink to={"/all-runs/log-run"}>

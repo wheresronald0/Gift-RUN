@@ -7,9 +7,9 @@ const eachRun = props => (
   <article className="runDetails" onClick={props.clicked}>
     <p className="runDetailsText">Date of run: {props.date}</p>
     <p>{props.miles} miles</p>
-    {/* <p>{props.totalTime}</p>
+    <p>{props.totalTime}</p>
     <p>{props.location}</p>
-    <p>{props.charity}</p> */}
+    <p>{props.charity}</p>
   </article>
 );
 
