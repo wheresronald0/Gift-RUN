@@ -16,7 +16,7 @@ const navBar = props => {
           </li>
 
           <li>
-            <NavLink to={"/log-run"}>Log a Run</NavLink>
+            <NavLink to={"/all-runs/log-run"}>Log a Run</NavLink>
           </li>
 
           <li>

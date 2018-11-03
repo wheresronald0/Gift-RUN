@@ -7,7 +7,7 @@ const landingPage = () => {
     <div className="landingPageWrapper">
       <h2>Welcome. Please Log a Gift-RUN!</h2>
 
-      <NavLink to={"/log-run"}>
+      <NavLink to={"/all-runs/log-run"}>
         <button className="bigLandingButton">Log a Run</button>
       </NavLink>
     </div>

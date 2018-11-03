@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "../Components/NavBar/NavBar";
 import "../Container/Layout.css";
 import backdrop from "../Assets/backdrop.jpeg";
@@ -7,6 +7,7 @@ import LogRun from "./LogRun/LogRun";
 import Charities from "../Components/Charities/Charities";
 import AllRuns from "../Components/AllRuns/AllRuns";
 import LandingPage from "../Components/LandingPage/LandingPage";
+import UpdateRun from "../Container/LogRun/UpdateRun/UpdateRun";
 class Layout extends Component {
   render() {
     console.log("Hello from layout");
@@ -22,9 +23,11 @@ class Layout extends Component {
 
         <div className="layout">
           <Switch>
-            <Route path="/all-runs" component={AllRuns} />
+            <Redirect from="/workAround" to="/all-runs" />
+            <Route path="/all-runs/:id/edit" component={UpdateRun} />
+            <Route path="/all-runs/log-run" component={LogRun} />
             <Route path="/charities" component={Charities} />
-            <Route path="/log-run" component={LogRun} />
+            <Route path="/all-runs" component={AllRuns} />
             <Route path="/" component={LandingPage} />
           </Switch>
         </div>

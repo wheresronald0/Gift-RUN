@@ -14,11 +14,12 @@ class AllRuns extends Component {
       run: [],
       runId: null
     };
+    // this.runSummarySelectedHandler = this.runSummarySelectedHandler.bind(this);
   }
 
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("http://localhost:4000/run") //might need || statement on these to deploy
       .then(response => {
         // console.log(response.data);
         this.setState({ run: response.data });
@@ -28,22 +29,26 @@ class AllRuns extends Component {
         console.log(error);
       });
   }
+
   // update the runId state to tile clicked
-  runSummarySelectedHandler = id => {
-    this.setState({ runId: id });
-    console.log("Hello from the runSummarySelected Handler!");
-  };
+  // runSummarySelectedHandler = id => {
+  //   this.setState({ runId: id });
+  //   console.log("Hello from the runSummarySelected Handler!");
+  // };
 
   render() {
+    console.log(this.props);
     let populateRuns = this.state.run.map(obj => {
       return (
-        <Link to={"/all-runs/" + obj.id} key={obj.id}>
-          {/* <Link to={"/all-runs/" + obj.id} key={obj.id}> */}
+        <Link to={"/all-runs/" + obj._id} key={obj._id}>
           <EachRun
-            title={obj.title}
-            // miles={this.state.miles}
-            // charity={this.state.charity}
-            clicked={() => this.runSummarySelectedHandler(obj.id)}
+            id={obj._id}
+            date={obj.date}
+            miles={obj.miles}
+            totalTime={obj.totalTime}
+            location={obj.location}
+            charity={obj.charity}
+            // clicked={() => this.runSummarySelectedHandler(obj.id)}
           />
         </Link>
       );
@@ -52,10 +57,8 @@ class AllRuns extends Component {
     return (
       <div>
         <h1>Your Gift Runs</h1>
-        <Switch>
-          <Route path={"/all-runs/:id/edit"} component={UpdateRun} />
-          <Route path={this.props.match.url + "/:id"} component={RunSummary} />
-        </Switch>
+
+        <Route path={this.props.match.url + "/:id"} component={RunSummary} />
 
         <div className="allRuns">{populateRuns}</div>
       </div>

@@ -1,42 +1,44 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import "./LogRun.css";
-import Charities from "../../Components/Charities/Charities";
+// import Charities from "../../Components/Charities/Charities";
+import SPCA from "../../Components/Charities/Charity/SPCA";
+import CatHouse from "../../Components/Charities/Charity/CatHouse";
+import WoundedWarriors from "../../Components/Charities/Charity//WoundedWarriors";
+import RedCross from "../../Components/Charities/Charity/RedCross";
 
 class LogRun extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      run: {
-        date: "",
-        miles: "",
-        totalTime: "",
-        location: "",
-        charity: ""
-      }
+      redirect: false
     };
   }
 
-edit-update request:
-// get request with id to get data a set state (already have in tag)
+  setRedirect = () => {
+    this.setState({ redirect: true });
+  };
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/all-runs" />;
+    }
+  };
 
   postRunHandler = () => {
-    const data = {
-      date: this.state.date,
-      miles: this.state.miles,
-      totalTime: this.state.totalTime,
-      location: this.state.location,
-      charity: this.state.charity
-    };
-    axios
-      .post("https://jsonplaceholder.typicode.com/posts", data)
-      .then(response => {
-        console.log(response);
-        console.log("data posted!!!");
-      });
+    const data = this.state;
+    axios.post("http://localhost:4000/run/new", data).then(response => {
+      console.log(response);
+      console.log("data posted!!!");
+      if (response) {
+        this.setRedirect();
+      }
+    });
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="wrapper">
         <div className="logRun">
@@ -66,7 +68,11 @@ edit-update request:
             onChange={event => this.setState({ location: event.target.value })}
           />
           <label>Which Charity?</label>
-          <select value={this.state.charity}>
+          <select
+            onChange={event =>
+              this.setState({ run: { charity: event.target.value } })
+            }
+          >
             <option value="SPCA">SPCA</option>
             <option value="Cat House on the Kings">
               Cat House on the Kings
@@ -74,10 +80,15 @@ edit-update request:
             <option value="Wounded Warriors">Wounded Warriors</option>
             <option value="Red Cross">Red Cross</option>
           </select>
+
           <button onClick={this.postRunHandler}>Log Run</button>
+          {this.renderRedirect()}
         </div>
-        <div className="charities">
-          <Charities />
+        <div>
+          <SPCA />
+          <CatHouse />
+          <WoundedWarriors />
+          <RedCross />
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import "./UpdateRun.css";
 // import Charities from "../../../Components/Charities/Charities";
 
@@ -7,9 +8,8 @@ class UpdateRun extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      run: null
-      // runId: null
-      //runId is render control for this form
+      run: null,
+      updateRedirect: false
     };
   }
 
@@ -17,9 +17,9 @@ class UpdateRun extends Component {
     this.loadData();
   }
 
-  // componentDidUpdate() {
-  //   this.loadData();
-  // }
+  componentDidUpdate() {
+    this.loadData();
+  }
 
   loadData() {
     if (this.props.match.params.id) {
@@ -29,37 +29,39 @@ class UpdateRun extends Component {
         // (this.state.run && this.state.run.id !== this.props.id)
       ) {
         axios
-          .get(
-            "https://jsonplaceholder.typicode.com/posts/" +
-              this.props.match.params.id
-          )
+          .get("http://localhost:4000/run/" + this.props.match.params.id)
           .then(response => {
             console.log("...is this loadData working");
             this.setState({ run: response.data });
             console.log(this.state.run);
-            console.log("is this loadData working");
+            console.log("update loadData working");
           });
       }
     }
   }
 
   updateRunHandler = () => {
-    const data = {
-      id: this.state.props,
-      date: this.state.date,
-      miles: this.state.miles,
-      totalTime: this.state.totalTime,
-      location: this.state.location,
-      charity: this.state.charity
-    };
+    const data = this.state.run;
+
     axios
-      .put("https://jsonplaceholder.typicode.com/posts/" + data.id, data)
-      //not sure if this put struction with 3 arguments is correct
+      .put("http://localhost:4000/run/" + this.props.match.params.id, data)
       .then(response => {
         console.log(response);
         console.log("Updated data posted!!!");
-        //maybe put the redirect to AllRuns here?
+        if (response) {
+          this.setUpdateRedirect();
+        }
       });
+  };
+
+  setUpdateRedirect = () => {
+    this.setState({ updateRedirect: true });
+  };
+
+  renderOnUpdateRedirect = () => {
+    if (this.state.updateRedirect) {
+      return <Redirect to="/all-runs" />;
+    }
   };
 
   // runDataBeingUpdated = event => {
@@ -116,7 +118,12 @@ class UpdateRun extends Component {
             }
           />
           <label>Which Charity?</label>
-          <select value={this.state.run.charity}>
+          <select
+            onChange={event =>
+              this.setState({ run: { charity: event.target.value } })
+            }
+            value={this.state.run.charity}
+          >
             <option value="SPCA">SPCA</option>
             <option value="Cat House on the Kings">
               Cat House on the Kings
@@ -125,6 +132,7 @@ class UpdateRun extends Component {
             <option value="Red Cross">Red Cross</option>
           </select>
           <button onClick={this.updateRunHandler}>Update Run</button>
+          {this.renderOnUpdateRedirect()}
         </div>
       );
     }
