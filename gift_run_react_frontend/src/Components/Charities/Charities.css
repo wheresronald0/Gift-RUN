@@ -4,9 +4,16 @@
 }
 
 .wrapper {
-  background-color: rgba(255, 255, 255, 0.35);
   display: flex;
 }
 .card {
   margin: 5% 4%;
+}
+
+.aboutUs {
+  margin: auto;
+  margin-top: 50px;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.35);
+  text-align: left;
 }

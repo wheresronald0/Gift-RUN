@@ -20,7 +20,7 @@ const navBar = props => {
           </li>
 
           <li>
-            <NavLink to={"/charities"}>Charities</NavLink>
+            <NavLink to={"/charities"}>About Us | Charities</NavLink>
           </li>
 
           <li>
