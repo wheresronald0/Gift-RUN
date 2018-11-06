@@ -8,9 +8,13 @@ const cors = require("cors");
 
 const indexRoute = require("./routes/index.js");
 
-mongoose
-  .connect("mongodb://localhost/Gift_RUN")
-  .then(console.log("Mongo is connected!"));
+if (process.env.NODE_ENV == "production") {
+  mongoose.connect(
+    "mongodb://gift_run_admin:dbadmin1@ds155073.mlab.com:55073/gift-run"
+  );
+} else {
+  mongoose.connect("mongodb://localhost/Gift_RUN");
+}
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +23,8 @@ app.use(cors());
 
 app.use("/run", indexRoute);
 
-app.listen(4000, () => {
-  console.log("Gift-RUN Server is gifting!!");
+app.set("port", process.env.PORT || 4000);
+
+app.listen(app.get("port"), () => {
+  console.log(`✅ PORT: ${app.get("port")} 🌟`);
 });
