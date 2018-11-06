@@ -1,15 +1,12 @@
-.charities {
-  margin: auto;
-  margin-top: 80px;
-  width: 60%;
-  display: flex;
-  justify-content: center;
-  background-color: rgba(207, 207, 207, 0.555);
-  box-shadow: 0px 3px 7px rgba(39, 39, 39, 0.87);
+.charityDescription {
+  text-align: left;
+  margin-bottom: 15%;
 }
 
-h1 {
-  font-size: 1.3em;
-  font-weight: 450;
-  color: rgba(0, 0, 0, 0.932);
+.wrapper {
+  background-color: rgba(255, 255, 255, 0.35);
+  display: flex;
+}
+.card {
+  margin: 5% 4%;
 }

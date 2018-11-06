@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import "./LogRun.css";
-// import Charities from "../../Components/Charities/Charities";
 import SPCA from "../../Components/Charities/Charity/SPCA";
-import CatHouse from "../../Components/Charities/Charity/CatHouse";
-import WoundedWarriors from "../../Components/Charities/Charity//WoundedWarriors";
-import RedCross from "../../Components/Charities/Charity/RedCross";
-
+import ACS from "../../Components/Charities/Charity/ACS";
+import STC from "../../Components/Charities/Charity//STC";
+import Habitat from "../../Components/Charities/Charity/Habitat";
 class LogRun extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +27,6 @@ class LogRun extends Component {
   postRunHandler = () => {
     const data = this.state;
     axios.post("http://localhost:4000/run/new", data).then(response => {
-      console.log(response);
-      console.log("data posted!!!");
       if (response) {
         this.setRedirect();
       }
@@ -38,58 +34,86 @@ class LogRun extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
-      <div className="wrapper">
-        <div className="logRun">
-          <h1>Tell Us About Your Run</h1>
-          <label>Date of Your Run</label>
-          <input
-            type="text"
-            value={this.state.date}
-            onChange={event => this.setState({ date: event.target.value })}
-          />
-          <label>Total Miles You Ran</label>
-          <input
-            type="text"
-            value={this.state.miles}
-            onChange={event => this.setState({ miles: event.target.value })}
-          />
-          <label>Total Run Time</label>
-          <input
-            type="text"
-            value={this.state.totalTime}
-            onChange={event => this.setState({ totalTime: event.target.value })}
-          />
-          <label>Location of Your Run</label>
-          <input
-            type="text"
-            value={this.state.location}
-            onChange={event => this.setState({ location: event.target.value })}
-          />
-          <label>Which Charity?</label>
-          <select
-            value={"Please Select:"}
-            onChange={event =>
-              this.setState({ run: { charity: event.target.value } })
-            }
-          >
-            <option> Please Select:</option>
-            <option value="SPCA">SPCA</option>
-            <option value="Cat House on the Kings">
-              Cat House on the Kings
-            </option>
-            <option value="Wounded Warriors">Wounded Warriors</option>
-            <option value="Red Cross">Red Cross</option>
-          </select>
-          <button onClick={this.postRunHandler}>Log Run</button>
-          {this.renderRedirect()}
-        </div>
-        <div>
-          <SPCA />
-          <CatHouse />
-          <WoundedWarriors />
-          <RedCross />
+      <div className="ui raised text container segment">
+        <div className="ui two column grid">
+          <div className="row">
+            <div className="column">
+              <h1>Tell Us About Your Run</h1>
+              <div className="ui form">
+                <div className="field">
+                  <label>Date of Your Run</label>
+                  <input
+                    type="text"
+                    value={this.state.date}
+                    onChange={event =>
+                      this.setState({ date: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="field">
+                  <label>Total Miles You Ran</label>
+                  <input
+                    type="text"
+                    value={this.state.miles}
+                    onChange={event =>
+                      this.setState({ miles: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="field">
+                  <label>Total Run Time</label>
+                  <input
+                    type="text"
+                    value={this.state.totalTime}
+                    onChange={event =>
+                      this.setState({ totalTime: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="field">
+                  <label>Location of Your Run</label>
+                  <input
+                    type="text"
+                    value={this.state.location}
+                    onChange={event =>
+                      this.setState({ location: event.target.value })
+                    }
+                  />
+                </div>
+                <div className="field">
+                  <label>Which Charity?</label>
+                  <select
+                    onChange={event =>
+                      this.setState({ run: { charity: event.target.value } })
+                    }
+                  >
+                    <option> Please Select:</option>
+                    <option value="SPCA">SPCA</option>
+                    <option value="American Cancer Society">
+                      American Cencer Society
+                    </option>
+                    <option value="Save the Children">Save the Children</option>
+                    <option value="Habitat for Humanity">
+                      Habitat for Humanity
+                    </option>
+                  </select>
+                </div>
+                <button class="ui yellow button" onClick={this.postRunHandler}>
+                  Log Run
+                </button>
+                {this.renderRedirect()}
+              </div>
+            </div>
+            <div className="row">
+              <div className="column logos">
+                <SPCA />
+                <ACS />
+                <STC />
+                <Habitat />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./RunSummary.css";
+import Run from "../../Assets/run1.jpeg";
 
 class RunSummary extends Component {
   state = {
@@ -15,9 +16,6 @@ class RunSummary extends Component {
 
   componentDidUpdate() {
     this.loadData();
-    // console.log("Comp did updtate");
-    // console.log(this.props);
-    // console.log(this.state.run);
   }
 
   loadData() {
@@ -25,15 +23,11 @@ class RunSummary extends Component {
       if (
         !this.state.run ||
         (this.state.run && this.state.run._id !== this.props.match.params.id)
-        // (this.state.run && this.state.run.id !== this.props.id)
       ) {
         axios
           .get("http://localhost:4000/run/" + this.props.match.params.id)
           .then(response => {
-            console.log("...is this loadData working");
             this.setState({ run: response.data });
-            console.log(this.state.run);
-            console.log("loadData working");
           });
       }
     }
@@ -42,12 +36,10 @@ class RunSummary extends Component {
   setDeleteRedirect = () => {
     this.setState({ deleteRedirect: true });
     this.setDeleteRedirect = this.setDeleteRedirect.bind(this);
-    console.log(this.state);
   };
 
   renderOnDeleteRedirect = () => {
     if (this.state.deleteRedirect) {
-      console.log("Redirect should be working");
       return <Redirect to="/workAround" />;
     }
   };
@@ -56,48 +48,53 @@ class RunSummary extends Component {
     axios
       .delete("http://localhost:4000/run/" + this.state.run._id)
       .then(response => {
-        console.log(response);
         if (response) {
           this.setDeleteRedirect();
         }
       });
   };
 
-  // updateRunSelectedHandler = () => { //can delete
-  //   this.setState({ updateRunId: true });
-  // };
-
   render() {
-    console.log("HI from Run Summary");
-    console.log(this.props);
-    console.log(this.state);
     let run = null;
     if (this.state.run) {
       run = (
-        <div className="runSummaryDetails">
+        <div className="ui raised very padded text container segment">
           <div>
-            <p>{this.state.run._id}</p>
-            <p>{this.state.run.date}</p>
-            <p>{this.state.run.miles}</p>
-            <p>{this.state.run.totalTime}</p>
-            <p>{this.state.run.location}</p>
-            <p>{this.state.run.charity}</p>
+            <h2 class="ui header">Here are the details of this Gift-RUN</h2>
+
+            <p>
+              <strong>Date of your run:&nbsp;&nbsp;&nbsp;</strong>
+              {this.state.run.date}
+            </p>
+            <p>
+              <strong>Miles you ran:&nbsp;&nbsp;&nbsp;</strong>
+              {this.state.run.miles}
+            </p>
+            <p>
+              <strong>Total time of your run:&nbsp;&nbsp;&nbsp;</strong>
+              {this.state.run.totalTime}
+            </p>
+            <p>
+              <strong>Location of your run:&nbsp;&nbsp;&nbsp;</strong>
+              {this.state.run.location}
+            </p>
+            <p>
+              <strong>
+                The charity receiving your Gift:&nbsp;&nbsp;&nbsp;
+              </strong>
+              {this.state.run.charity}
+            </p>
           </div>
-          <div>
+          <div className="buttonWrapper">
             <NavLink to={"/all-runs/log-run"}>
-              <button className="editButtons">Log Another Run</button>
+              <button class="ui yellow button">Log Another Run</button>
             </NavLink>
 
             <NavLink to={"/all-runs/" + this.state.run._id + "/edit"}>
-              <button
-                className="editButtons"
-                // onClick={this.updateRunSelectedHandler}// can delete
-              >
-                Edit Run Details
-              </button>
+              <button class="ui yellow button">Edit Run Details</button>
             </NavLink>
 
-            <button className="editButtons" onClick={this.deletePostHandler}>
+            <button class="ui red button" onClick={this.deletePostHandler}>
               Delete This Run
             </button>
             {this.renderOnDeleteRedirect()}
@@ -106,7 +103,7 @@ class RunSummary extends Component {
       );
     }
     return (
-      <div>
+      <div className="summary">
         <div>{run}</div>
       </div>
     );
@@ -114,177 +111,3 @@ class RunSummary extends Component {
 }
 
 export default RunSummary;
-
-//2nd DO NOT TOUCH - this is pre-routing with data flowing all the way thnrough to update form, BUT this, run summary, and all runs all populated together
-// import React, { Component } from "react";
-// import { NavLink } from "react-router-dom";
-// import axios from "axios";
-// import "./RunSummary.css";
-// import UpdateRun from "../../Container/LogRun/UpdateRun/UpdateRun";
-
-// class RunSummary extends Component {
-//   state = {
-//     run: null,
-//     updateRunId: null
-//   };
-
-//   componentDidMount() {
-//     this.loadData();
-//   }
-
-//   componentDidUpdate() {
-//     this.loadData();
-//   }
-
-//   loadData() {
-//     if (this.props.match.params.id) {
-//       if (
-//         !this.state.run ||
-//         (this.state.run.id && this.state.run.id !== +this.props.match.params.id)
-//         // (this.state.run && this.state.run.id !== this.props.id)
-//       ) {
-//         axios
-//           .get(
-//             "https://jsonplaceholder.typicode.com/posts/" +
-//               this.props.match.params.id
-//           )
-//           .then(response => {
-//             console.log("...is this loadData working");
-//             this.setState({ run: response.data });
-//             console.log(this.state.run);
-//             console.log("is this loadData working");
-//           });
-//       }
-//     }
-//   }
-
-//   updateRunSelectedHandler = () => {
-//     this.setState({ updateRunId: true });
-//   };
-
-//   deletePostHandler = () => {
-//     axios.delete("/api/" + this.props.run.id);
-//     // .then() redirect to AllRuns- not sure if the component will unmount
-//   };
-//   render() {
-//     console.log("HI from Run Summary");
-//     console.log(this.state.run);
-//     let run = null;
-//     if (this.state.run) {
-//       run = (
-//         <div className="runSummaryDetails">
-//           <div>
-//             <p>{this.state.run.title}</p>
-//             {/* //real props below */}
-//             {/* <p>{this.state.id}</p>
-//           <p>{this.state.date}</p>
-//           <p>{this.state.miles}</p>
-//           <p>{this.state.totalTime}</p>
-//           <p>{this.state.location}</p> */}
-//           </div>
-//           <div>
-//             <NavLink to={"/log-run"}>
-//               <button className="editButtons">Log Another Run</button>
-//             </NavLink>
-//             <NavLink to={"/update-run"}>
-//               <button
-//                 className="editButtons"
-//                 onClick={this.updateRunSelectedHandler}
-//               >
-//                 Edit Run Details
-//               </button>
-//             </NavLink>
-
-//             <button className="editButtons" onClick={this.deletePostHandler}>
-//               Delete This Run
-//             </button>
-//           </div>
-//         </div>
-//       );
-//     }
-//     return (
-//       <div>
-//         <div>
-//           <UpdateRun dataah={this.state.run} render={this.state.updateRunId} />
-//           {run}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default RunSummary;
-
-// ---- DON NOT TOUCH -----
-////Funtionality prior to messing with the Edit/Update CRUD
-// import React, { Component } from "react";
-// import { NavLink } from "react-router-dom";
-// import axios from "axios";
-// import "./RunSummary.css";
-
-// class RunSummary extends Component {
-//   state = {
-//     run: null
-//   };
-
-//   componentDidUpdate() {
-//     if (this.props.id) {
-//       if (
-//         !this.state.run ||
-//         (this.state.run && this.state.run.id !== this.props.id)
-//       ) {
-//         axios
-//           .get("https://jsonplaceholder.typicode.com/posts/" + this.props.id)
-//           .then(response => {
-//             this.setState({ run: response.data });
-//             console.log(this.state.run);
-//           });
-//       }
-//     }
-//   }
-
-//   deletePostHandler = () => {
-//     axios.delete("/api/" + this.props.run.id);
-//     // .then() redirect to AllRuns- not sure if the component will unmount
-//   };
-//   render() {
-//     console.log("HI from Run Summary");
-//     console.log(this.state.run);
-//     let run = <p />;
-//     if (this.state.run) {
-//       run = (
-//         <div className="runSummaryDetails">
-//           <div>
-//             <p>{this.state.run.title}</p>
-//             <p>Hola!</p>
-//             {/* //real props below */}
-//             {/* <p>{this.state.id}</p>
-//           <p>{this.state.date}</p>
-//           <p>{this.state.miles}</p>
-//           <p>{this.state.totalTime}</p>
-//           <p>{this.state.location}</p> */}
-//           </div>
-//           <div>
-//             <NavLink to={"/log-run"}>
-//               <button className="editButtons">Log Another Run</button>
-//             </NavLink>
-//             <NavLink to={"/update-run"}>
-//               <button className="editButtons" on>Edit Run Details</button>
-//             </NavLink>
-
-//             <button className="editButtons" onClick={this.deletePostHandler}>
-//               Delete This Run
-//             </button>
-//           </div>
-//         </div>
-//       );
-//     }
-//     return (
-//       <div>
-//         <div>{run}</div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default RunSummary;

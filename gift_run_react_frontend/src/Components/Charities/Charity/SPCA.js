@@ -1,6 +1,6 @@
 import React from "react";
 import "../Charity/Charity.css";
-import SPCA from "../../../Assets/SPCA.jpg";
+import SPCA from "../../../Assets/SPCASolid.png";
 
 const spca = () => {
   return (
