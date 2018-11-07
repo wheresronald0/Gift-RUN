@@ -5,10 +5,10 @@ import "../Container/Layout.css";
 import backdrop from "../Assets/backdrop.jpeg";
 import LogRun from "./LogRun/LogRun";
 import Charities from "../Components/Charities/Charities";
-import AllRuns from "../Components/AllRuns/AllRuns";
+import AllRuns from "../Container/AllRuns/AllRuns";
 import LandingPage from "../Components/LandingPage/LandingPage";
 import UpdateRun from "../Container/LogRun/UpdateRun/UpdateRun";
-// import ButtonExampleButton from "../Components/Semantic UI Components/Button";
+
 class Layout extends Component {
   render() {
     return (

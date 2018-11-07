@@ -3,7 +3,18 @@ const app = express();
 const router = express.Router();
 const Run = require("../models/index.js");
 
-//index route
+//index
+router.route("/").get(function(req, res) {
+  Run.find(function(err, allRuns) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(allRuns);
+    }
+  });
+});
+
+//create route
 router.route("/new").post(function(req, res) {
   const run = new Run(req.body);
   run
@@ -14,17 +25,6 @@ router.route("/new").post(function(req, res) {
     .catch(err => {
       res.status(400).send("something went wrong! Run was not added");
     });
-});
-
-//create route
-router.route("/").get(function(req, res) {
-  Run.find(function(err, allRuns) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(allRuns);
-    }
-  });
 });
 
 //show route
