@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const mongo = require("mongo");
 
@@ -16,10 +17,9 @@ if (process.env.NODE_ENV == "production") {
   mongoose.connect("mongodb://localhost/Gift_RUN");
 }
 
-const app = express();
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
 
 app.use("/run", indexRoute);
 
