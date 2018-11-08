@@ -4,14 +4,14 @@ const router = express.Router();
 const Run = require("../models/index.js");
 
 //index
-router.route("/").get(function(req, res) {
+router.route("/").get(function(req, res, next) {
   Run.find(function(err, allRuns) {
     if (err) {
       console.log(err);
     } else {
       res.json(allRuns);
     }
-  });
+  }).catch(next);
 });
 
 //create route
@@ -28,25 +28,25 @@ router.route("/new").post(function(req, res) {
 });
 
 //show route
-router.route("/:id").get(function(req, res) {
+router.route("/:id").get(function(req, res, next) {
   Run.findById(req.params.id, function(err, aRun) {
     if (err) {
       console.log(err);
     } else {
       res.json(aRun);
     }
-  });
+  }).catch(next);
 });
 
 //edit route
-router.route("/:id/edit").get(function(req, res) {
+router.route("/:id/edit").get(function(req, res, next) {
   Run.findById(req.params.id, function(err, aRun) {
     if (err) {
       console.log(err);
     } else {
       res.json(aRun);
     }
-  });
+  }).catch(next);
 });
 
 //update route

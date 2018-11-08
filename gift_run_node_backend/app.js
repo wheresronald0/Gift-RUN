@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const mongo = require("mongo");
 
 const bodyParser = require("body-parser");
 
@@ -25,11 +24,12 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
   );
   next();
 });
