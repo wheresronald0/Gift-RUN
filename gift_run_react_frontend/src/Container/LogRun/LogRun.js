@@ -26,11 +26,14 @@ class LogRun extends Component {
 
   postRunHandler = () => {
     const data = this.state;
-    axios.post("http://localhost:4000/run/new", data).then(response => {
-      if (response) {
-        this.setRedirect();
-      }
-    });
+    axios
+      .post("https://gift-run.herokuapp.com/run/new", data)
+      .then(response => {
+        // axios.post("http://localhost:4000/run/new", data).then(response => {
+        if (response) {
+          this.setRedirect();
+        }
+      });
   };
 
   render() {

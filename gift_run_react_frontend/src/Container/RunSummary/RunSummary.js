@@ -25,7 +25,10 @@ class RunSummary extends Component {
         (this.state.run && this.state.run._id !== this.props.match.params.id)
       ) {
         axios
-          .get("http://localhost:4000/run/" + this.props.match.params.id)
+          .get(
+            "https://gift-run.herokuapp.com/run/" + this.props.match.params.id
+          )
+          // .get("http://localhost:4000/run/" + this.props.match.params.id)
           .then(response => {
             this.setState({ run: response.data });
           });
@@ -46,7 +49,8 @@ class RunSummary extends Component {
 
   deletePostHandler = () => {
     axios
-      .delete("http://localhost:4000/run/" + this.state.run._id)
+      .delete("https://gift-run.herokuapp.com/run/" + this.state.run._id)
+      // .delete("http://localhost:4000/run/" + this.state.run._id)
       .then(response => {
         if (response) {
           this.setDeleteRedirect();

@@ -19,7 +19,8 @@ class AllRuns extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/run")
+      .get("https://gift-run.herokuapp.com/run")
+      // .get("http://localhost:4000/run")
       .then(response => {
         this.setState({ run: response.data });
       })

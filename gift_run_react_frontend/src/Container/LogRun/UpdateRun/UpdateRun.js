@@ -31,7 +31,10 @@ class UpdateRun extends Component {
         (this.state.run.id && this.state.run.id !== +this.props.match.params.id)
       ) {
         axios
-          .get("http://localhost:4000/run/" + this.props.match.params.id)
+          .get(
+            "https://gift-run.herokuapp.com/run/" + this.props.match.params.id
+          )
+          // .get("http://localhost:4000/run/" + this.props.match.params.id)
           .then(response => {
             this.setState({ run: response.data });
           });
@@ -43,7 +46,11 @@ class UpdateRun extends Component {
     const data = this.state.run;
 
     axios
-      .put("http://localhost:4000/run/" + this.props.match.params.id, data)
+      .put(
+        "https://gift-run.herokuapp.com/run/" + this.props.match.params.id,
+        data
+      )
+      // .put("http://localhost:4000/run/" + this.props.match.params.id, data)
       .then(response => {
         if (response) {
           this.setUpdateRedirect();
