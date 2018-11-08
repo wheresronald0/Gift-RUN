@@ -9,14 +9,30 @@ const indexRoute = require("./routes/index.js");
 
 if (process.env.NODE_ENV == "production") {
   mongoose.connect(
-    "mongodb://gift_run_admin:dbadmin1@ds155073.mlab.com:55073/gift-run"
+    "mongodb://gift_run_admin:dbadmin1@ds155073.mlab.com:55073/gift-run",
+    { useNewUrlParser: true }
   );
 } else {
-  mongoose.connect("mongodb://localhost/Gift_RUN");
+  mongoose.connect(
+    "mongodb://localhost/Gift_RUN",
+    { useNewUrlParser: true }
+  );
 }
+mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static("public"));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use("/run", indexRoute);
 
