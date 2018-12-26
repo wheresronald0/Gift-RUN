@@ -14,7 +14,7 @@ class Layout extends Component {
     return (
       <div
         className="outerWrap"
-        style={{ backgroundImage: "url(" + backdrop + ")" }}
+        // style={{ backgroundImage: "url(" + backdrop + ")" }}
       >
         <div>
           <NavBar />
