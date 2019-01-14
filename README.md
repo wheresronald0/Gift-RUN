@@ -15,7 +15,7 @@ Gift-RUN is a factitious non-profit organization committed to making an impact t
 
 ## This project is / should be used for
 
-This is a factitious web application that was created to practice React, managing "state", and integration with a Node.js and MongoDb back-end
+This is a factitious full-stack MERN web application that was created to practice React, managing "state", and integration with a Node.js and MongoDB back-end
 
 ## Features - Pseudo Code (MVP/Bronze)
 
@@ -69,7 +69,7 @@ This project was bootstrapped with Create React App. Please visit this link for 
 
 ## Contribution Guidelines
 
-if you'd like to contribute to this project, please checkout a branch
+If you'd like to contribute to this project, please checkout a branch
 
 ## Project's main repository
 
