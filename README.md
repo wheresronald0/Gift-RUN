@@ -2,7 +2,7 @@
 
 ## Description
 
-Gift-RUN is a factitious non-profit organization committed to making an impact through our members and the miles they run. Members can donate miles logged in exchange for monetary contribution to a participating charity of their choice. Each hard fought mile can be converted to a one dollar contribution to the following charities:
+Gift-RUN is a fictitious non-profit organization committed to making an impact through our members and the miles they run. Members can donate miles logged in exchange for monetary contribution to a participating charity of their choice. Each hard fought mile can be converted to a one dollar contribution to the following charities:
 
 - SPCA
 - American Cancer Society
